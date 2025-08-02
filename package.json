@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Proyecto de DisenoDigitalComentarios",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "dev": "node --watch server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
