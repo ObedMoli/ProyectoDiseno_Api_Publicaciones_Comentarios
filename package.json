@@ -1,0 +1,29 @@
+{
+  "name": "proyectodiseno_api_publicaciones_comentarios",
+  "version": "1.0.0",
+  "description": "Proyecto de DisenoDigitalComentarios",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ObedMoli/ProyectoDiseno_Api_Publicaciones_Comentarios.git"
+  },
+  "author": "ObedMolina,SaubdyLucia,JorgeReyes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ObedMoli/ProyectoDiseno_Api_Publicaciones_Comentarios/issues"
+  },
+  "homepage": "https://github.com/ObedMoli/ProyectoDiseno_Api_Publicaciones_Comentarios#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.3",
+    "uuid": "^11.1.0",
+    "zod": "^4.0.14"
+  }
+}
