@@ -1,0 +1,22 @@
+### Registro de usuario
+
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Luuu",
+  "email": "lcia@gmail.com",
+  "password": "123456234",
+  "telefono": "97276654",
+  "about": "Desarrolla"
+}
+
+### Inicio de sesión
+
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "luciagmail.com",
+  "password": "12345678"
+}
