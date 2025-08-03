@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import authRoutes from './routes/auth.routes.js';
+import authRoutes from './routes/auth_routes.js';
 import roleRoutes from './routes/routasroles.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 
