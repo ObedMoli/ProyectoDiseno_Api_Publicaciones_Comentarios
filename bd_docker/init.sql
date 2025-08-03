@@ -57,3 +57,31 @@ CREATE TABLE comment (
     FOREIGN KEY (user_user_id) REFERENCES user(user_id),
     FOREIGN KEY (comment_by_user_name) REFERENCES user(name)
 );
+
+
+/*QUERY PARA INSERTAR DATOS INICIALES*/
+-- Insertar roles
+-- Insertar roles
+INSERT INTO role (role_name, role_description) VALUES
+('admin', 'Administrador del sistema'),
+('editor', 'Puede editar contenido'),
+('usuario', 'Usuario general del sistema');
+
+-- Insertar categorias
+INSERT INTO category (category_title, category_description) VALUES
+('Tecnologia', 'Publicaciones relacionadas con tecnologia'),
+('Educacion', 'Contenido educativo y formativo'),
+('Salud', 'Temas sobre salud y bienestar'),
+('Viajes', 'Experiencias y consejos de viaje'),
+('Cultura', 'Publicaciones sobre cultura general');
+/*CREACION DE USUARIO DE EJEMPLO*/
+INSERT INTO user (user_id, about ,email, name, password_hash, telefono, requiere_cambio_contrasena)
+VALUES (
+  UUID_TO_BIN(UUID()),
+  'Desarrollador de software y entusiasta de la tecnología.',
+  'jealvarengar@unah.edu.hn',
+  'Juan Alvarenga',
+  '$2y$10$secrethash',
+  '+50499999999', 
+  FALSE                 
+);
