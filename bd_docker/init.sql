@@ -62,10 +62,10 @@ CREATE TABLE comment (
 /*QUERY PARA INSERTAR DATOS INICIALES*/
 -- Insertar roles
 -- Insertar roles
-INSERT INTO role (role_name, role_description) VALUES
-('admin', 'Administrador del sistema'),
-('editor', 'Puede editar contenido'),
-('usuario', 'Usuario general del sistema');
+INSERT INTO role (role_name) VALUES
+('admin'),
+('editor'),
+('usuario');
 
 -- Insertar categorias
 INSERT INTO category (category_title, category_description) VALUES

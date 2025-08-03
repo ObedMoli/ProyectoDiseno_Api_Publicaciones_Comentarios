@@ -10,4 +10,4 @@
 # Para eliminar el volumen del docker
 	- docker-compose down -v
 # Para Levantar el docker nuevamente
-	- docker-compose up --build
+	- docker-compose up -d
