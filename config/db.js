@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export default mysql.createPool({
+const db=await mysql.createPool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     user: process.env.DB_USER,
@@ -13,3 +13,5 @@ export default mysql.createPool({
     connectionLimit: 10,
     queueLimit: 0
 });
+
+export default db;
