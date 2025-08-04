@@ -6,7 +6,8 @@ export const registerSchema =z.object({
     email: z.string({required_error: 'El email es obligatorio' }).email('El correo electrónico no es válido'),
     password: z.string({required_error: 'La contraseña es obligatoria' }).min(6, 'La contraseña debe tener al menos 6 caracteres'),
     telefono: z.string().optional(),
-    about: z.string().optional()
+    about: z.string().optional(),
+    role_name: z.string({required_error: 'El rol es obligatorio' })
 });
 
 
