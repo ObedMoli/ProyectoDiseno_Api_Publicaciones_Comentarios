@@ -29,7 +29,7 @@ Accept: application/json
 ### Crear una nueva publicación
 POST http://localhost:3000/api/publicaciones
 Content-Type: application/json
-Authorization: Bearer {{TOKEN}}
+#Authorization: Bearer {{TOKEN}}
 {
   "title": "Mi segundo post",
   "content_line1": "Contenido principal",
