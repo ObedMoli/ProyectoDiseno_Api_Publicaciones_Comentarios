@@ -4,6 +4,7 @@ import cors from 'cors';
 import authRoutes from './routes/auth_routes.js';
 import roleRoutes from './routes/routasroles.js';
 import { errorHandler } from './middlewares/errorHandler.js';
+import publicacionRoutes from './routes/publicacionRoutes.js';
 
 dotenv.config();
 
@@ -14,6 +15,9 @@ app.use(cors());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/roles', roleRoutes);
+
+// Publicaciones routes
+app.use('/api/publicaciones', publicacionRoutes);
 
 // Error handling middleware
 app.use(errorHandler);
