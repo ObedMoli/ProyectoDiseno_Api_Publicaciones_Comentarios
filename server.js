@@ -5,6 +5,7 @@ import authRoutes from './routes/auth_routes.js';
 import roleRoutes from './routes/routasroles.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import publicacionRoutes from './routes/publicacionRoutes.js';
+import comentarioRoutes from './routes/comentarioRoutes.js';
 
 dotenv.config();
 
@@ -18,6 +19,10 @@ app.use('/api/roles', roleRoutes);
 
 // Publicaciones routes
 app.use('/api/publicaciones', publicacionRoutes);
+
+// Comentarios routes
+app.use('/api', comentarioRoutes);
+
 
 // Error handling middleware
 app.use(errorHandler);
