@@ -29,7 +29,7 @@ Accept: application/json
 ### Crear una nueva publicación
 POST http://localhost:3000/api/publicaciones
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYjMyZGVjZmQyYjQ0NDA3YWJkYTZkM2IyMzZkYTJhNTAiLCJuYW1lIjoiZWJlIiwiaWF0IjoxNzU0MzcxOTU3LCJleHAiOjE3NTQzNzU1NTd9.JeAOt8UtWLuMWc376fldQTYGFj7oP5Zb71OOLR7aMHA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMWQ0OGFiOTE2MzVhNDNmMWI2NGJjMjUzOTUyN2Y5YTQiLCJuYW1lIjoiZWJlIiwiaWF0IjoxNzU0NDIyNzYzLCJleHAiOjE3NTQ0MjYzNjN9.utSg8pz77v4K-KSy3b8wSavMWX70TsOZRq2RtU_A5Ho
 
 {
   "title": "Mi segundo post",
@@ -37,4 +37,23 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYjMyZ
   "content_line2": "Más detalles opcionales",
   "image": "https://via.placeholder.com/150",
   "category_category_id": 1
+}
+
+### Obtener todos los comentarios del sistema (público)
+GET http://localhost:3000/api/comentarios
+Content-Type: application/json
+
+
+### Obtener comentarios de una publicación específica (público)
+GET http://localhost:3000/api/publicaciones/1/comentarios
+Content-Type: application/json
+
+
+### Publicar un nuevo comentario (requiere token)
+POST http://localhost:3000/api/publicaciones/1/comentarios
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMWQ0OGFiOTE2MzVhNDNmMWI2NGJjMjUzOTUyN2Y5YTQiLCJuYW1lIjoiZWJlIiwiaWF0IjoxNzU0NDIyNzYzLCJleHAiOjE3NTQ0MjYzNjN9.utSg8pz77v4K-KSy3b8wSavMWX70TsOZRq2RtU_A5Ho
+Content-Type: application/json
+
+{
+  "content": "Este es un comentario de prueba"
 }
