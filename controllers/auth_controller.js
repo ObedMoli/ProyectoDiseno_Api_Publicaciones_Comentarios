@@ -56,12 +56,13 @@ export const login = async (req, res, next) => {
         const result = validateLogin.safeParse(req.body);
 
         if (!result.success) {
+            const errores = result.error?.errors || [];
             return res.status(400).json(
-                badRequest('Error de validación', result.error.errors.map(e => ({
-                    campo: e.path.join('.'),
-                    mensaje: e.message
-                })))
-            );
+            badRequest('Error de validación', errores.map(e => ({
+            campo: e.path.join('.'),
+            mensaje: e.message
+        })))
+        );
         }
 
         const { email, password } = result.data;       
@@ -76,7 +77,13 @@ export const login = async (req, res, next) => {
             return res.status(401).json( unauthorized ( 'Credenciales inválidas' ));
         }
 
-        const token = jwt.sign({ id: user.user_id.toString('hex'), name: user.name }, process.env.JWT_SECRET, { expiresIn: '1h' });
+       const token = jwt.sign(
+        { user_id: user.user_id.toString('hex'), name: user.name },
+         process.env.JWT_SECRET,
+        { expiresIn: '1h' }
+        );
+
+       res.setHeader('Authorization', `Bearer ${token}`);
 
         res.status(201).json(ok('Inicio de sesión exitoso',{ token }));
         

@@ -4,11 +4,12 @@ POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-  "name": "Obed",
-  "email": "obed@gmail.com",
+  "name": "ebed",
+  "email": "obe@gmail.com",
   "password": "123456",
   "telefono": "94549026",
-  "about": "Fanatico del cine"
+  "about": "Fanatico del cine",
+  "role_name": "usuario"
 }
 
 ### Inicio de sesión
@@ -24,3 +25,15 @@ Content-Type: application/json
 ### Obtener publicaciones
 GET http://localhost:3000/api/publicaciones
 Accept: application/json
+
+### Crear una nueva publicación
+POST http://localhost:3000/api/publicaciones
+Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
+{
+  "title": "Mi segundo post",
+  "content_line1": "Contenido principal",
+  "content_line2": "Más detalles opcionales",
+  "image": "https://via.placeholder.com/150",
+  "category_category_id": 1
+}
