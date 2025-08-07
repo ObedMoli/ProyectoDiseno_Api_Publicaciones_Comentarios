@@ -58,3 +58,26 @@ export const obtenerPublicacionPorId = async (id) => {
 
   return rows[0]; // Devuelve un solo objeto o undefined
 };
+export const obtenerPublicacionConAutor = async (post_id) => {
+  const [rows] = await db.execute(`
+    SELECT user_user_id FROM post WHERE post_id = ?
+  `, [post_id]);
+  return rows[0];
+};
+
+export const actualizarPublicacion = async (post_id, data) => {
+  const { title, content_line1, content_line2, image, category_category_id } = data;
+
+  await db.execute(`
+    UPDATE post 
+    SET title = ?, content_line1 = ?, content_line2 = ?, image = ?, category_category_id = ?
+    WHERE post_id = ?
+  `, [
+    title,
+    content_line1,
+    content_line2 || null,
+    image || null,
+    category_category_id,
+    post_id
+  ]);
+};

@@ -4,8 +4,8 @@ POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-  "name": "ebe",
-  "email": "ob@gmail.com",
+  "name": "obed",
+  "email": "obed@gmail.com",
   "password": "123456789",
   "telefono": "94549026",
   "about": "Fanatico del cine",
@@ -40,6 +40,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTQwO
   "content_line2": "Más detalles opcionales",
   "image": "https://via.placeholder.com/150",
   "category_category_id": 1
+}
+
+### Actualizar una publicación existente (requiere token)
+PUT http://localhost:3000/api/publicaciones/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTQwOTE3ZDg1MDIzNGZjYWEwNTE3ZjA3MDZmOWU4ZTAiLCJuYW1lIjoiZWJlIiwiaWF0IjoxNzU0NTQ1MzA1LCJleHAiOjE3NTQ1NDg5MDV9.TzMbFsYPbwHAoC-5GUH8DmLEJHbl-5bVXVAO9eC3Lo8
+
+{
+  "title": "Actualización de mi tercer post",
+  "content_line1": "Nuevo contenido principal",
+  "content_line2": "Línea secundaria actualizada",
+  "image": "https://via.placeholder.com/300",
+  "category_category_id": 2
 }
 
 ### Obtener todos los comentarios del sistema (público)
