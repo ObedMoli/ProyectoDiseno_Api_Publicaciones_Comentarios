@@ -1,7 +1,8 @@
 import { obtenerPublicaciones } from '../models/publicacionModel.js';
-import { ok, internalError,created, badRequest } from '../utils/utils.js';
+import { ok, internalError,created, badRequest, notFound } from '../utils/utils.js';
 import { publicacionSchema } from '../schemas/validatorsPublicacion.js';
 import { crearPublicacion } from '../models/publicacionModel.js';
+import { obtenerPublicacionPorId } from '../models/publicacionModel.js';
 
 export const getPublicaciones = async (req, res) => {
   try {
@@ -32,5 +33,23 @@ export const postPublicacion = async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json(internalError('Error al crear la publicación', error.message));
+  }
+};
+export const getPublicacionPorId = async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) {
+      return res.status(400).json(badRequest('ID inválido'));
+    }
+
+    const publicacion = await obtenerPublicacionPorId(id);
+    if (!publicacion) {
+      return res.status(404).json(notFound('Publicación no encontrada'));
+    }
+
+    return res.status(200).json(ok('Publicación encontrada', publicacion));
+  } catch (error) {
+    console.error('Error al obtener publicación por ID:', error);
+    return res.status(500).json(internalError('Error del servidor', error.message));
   }
 };

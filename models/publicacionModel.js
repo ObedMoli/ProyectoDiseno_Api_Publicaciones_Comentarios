@@ -38,3 +38,23 @@ export const crearPublicacion = async (post) => {
 
   await db.execute(query, values);
 };
+
+export const obtenerPublicacionPorId = async (id) => {
+  const [rows] = await db.execute(`
+    SELECT 
+      p.post_id,
+      p.title,
+      p.content_line1,
+      p.content_line2,
+      p.image,
+      p.date,
+      u.name AS autor,
+      c.category_title AS categoria
+    FROM post p
+    JOIN user u ON p.user_user_id = u.user_id
+    LEFT JOIN category c ON p.category_category_id = c.category_id
+    WHERE p.post_id = ?
+  `, [id]);
+
+  return rows[0]; // Devuelve un solo objeto o undefined
+};
