@@ -1,6 +1,6 @@
 import db from '../config/db.js';
 
-
+/// Convierte nombre de categoría a su ID
 const obtenerCategoryIdPorNombre = async (nombre) => {
   const [rows] = await db.execute(
     'SELECT category_id FROM category WHERE category_title = ?',
@@ -9,6 +9,7 @@ const obtenerCategoryIdPorNombre = async (nombre) => {
   return rows.length ? rows[0].category_id : null;
 };
 
+/// Obtiene todas las publicaciones con autor y categoría
 export const obtenerPublicaciones = async () => {
   const [rows] = await db.execute(`
     SELECT 
@@ -28,6 +29,7 @@ export const obtenerPublicaciones = async () => {
   return rows;
 };
 
+/// Crea una nueva publicación en la base de datos
 export const crearPublicacion = async (post) => {
   const { title, content_line1, content_line2, image, category_title, user_user_id } = post;
 
@@ -54,6 +56,7 @@ export const crearPublicacion = async (post) => {
   await db.execute(query, values);
 };
 
+/// Obtiene una publicación por su ID, incluyendo autor y categoría
 export const obtenerPublicacionPorId = async (id) => {
   const [rows] = await db.execute(`
     SELECT 
@@ -79,7 +82,7 @@ export const obtenerPublicacionConAutor = async (post_id) => {
   `, [post_id]);
   return rows[0];
 };
-
+/// Actualiza una publicación existente por su ID
 export const actualizarPublicacion = async (post_id, data) => {
   const { title, content_line1, content_line2, image, category_title } = data;
 

@@ -44,17 +44,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1Z
   "category_title": "Educacion"
 }
 
-### Actualizar una publicación existente (requiere token)
-PUT http://localhost:3000/api/publicaciones/4
+### Actualizar una publicación existente (requiere token)///Categorias validas: Tecnologia, Salud, Educacion, Viajes,Cultura
+PUT http://localhost:3000/api/publicaciones/6
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY3ODY4NywiZXhwIjoxNzU0NjgyMjg3fQ.YIdsN26Q2B2vctKJpGJCsKJuRDMrbKIyZLY8wmgrgx0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY4NjczNCwiZXhwIjoxNzU0NjkwMzM0fQ.-jY_STnFNT53gwFOerlEgFHBCpKgbAmYDwUb0wygb9c
 
 {
   "title": "Actualización de mi cuarto post",
   "content_line1": "Nuevo contenido principal",
   "content_line2": "Línea secundaria actualizada",
   "image": "https://via.placeholder.com/300",
-  "category_title": "Educacion"
+  "category_title": "Salud" 
 }
 
 ### Eliminar publicación (autor autenticado)
