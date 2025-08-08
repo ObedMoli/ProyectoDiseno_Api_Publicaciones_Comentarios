@@ -29,17 +29,19 @@ Accept: application/json
 GET http://localhost:3000/api/publicaciones/1
 Accept: application/json
 
+
+
 ### Crear una nueva publicación
 POST http://localhost:3000/api/publicaciones
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY3ODMxMiwiZXhwIjoxNzU0NjgxOTEyfQ.FOucklEwCQUj9At5xaMEHDwxqGTBZvoxidxeen9Wry4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY4NjczNCwiZXhwIjoxNzU0NjkwMzM0fQ.-jY_STnFNT53gwFOerlEgFHBCpKgbAmYDwUb0wygb9c
 
 {
-  "title": "Mi quinto post",
+  "title": "Mi sexto post",
   "content_line1": "Contenido principal",
   "content_line2": "Más detalles opcionales",
   "image": "https://via.placeholder.com/150",
-  "category_category_id": 1
+  "category_title": "Educacion"
 }
 
 ### Actualizar una publicación existente (requiere token)
@@ -52,7 +54,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1Z
   "content_line1": "Nuevo contenido principal",
   "content_line2": "Línea secundaria actualizada",
   "image": "https://via.placeholder.com/300",
-  "category_category_id": 2
+  "category_title": "Educacion"
 }
 
 ### Eliminar publicación (autor autenticado)

@@ -1,5 +1,14 @@
 import db from '../config/db.js';
 
+
+const obtenerCategoryIdPorNombre = async (nombre) => {
+  const [rows] = await db.execute(
+    'SELECT category_id FROM category WHERE category_title = ?',
+    [nombre]
+  );
+  return rows.length ? rows[0].category_id : null;
+};
+
 export const obtenerPublicaciones = async () => {
   const [rows] = await db.execute(`
     SELECT 
@@ -20,7 +29,13 @@ export const obtenerPublicaciones = async () => {
 };
 
 export const crearPublicacion = async (post) => {
-  const { title, content_line1, content_line2, image, category_category_id, user_user_id } = post;
+  const { title, content_line1, content_line2, image, category_title, user_user_id } = post;
+
+  // Convertir nombre a ID
+  const categoryId = await obtenerCategoryIdPorNombre(category_title);
+  if (!categoryId) {
+    throw new Error(`La categoría '${category_title}' no existe`);
+  }
 
   const query = `
     INSERT INTO post (title, content_line1, content_line2, image, category_category_id, user_user_id)
@@ -32,7 +47,7 @@ export const crearPublicacion = async (post) => {
     content_line1,
     content_line2 || null,
     image || null,
-    category_category_id,
+    categoryId,
     user_user_id
   ];
 
@@ -66,7 +81,13 @@ export const obtenerPublicacionConAutor = async (post_id) => {
 };
 
 export const actualizarPublicacion = async (post_id, data) => {
-  const { title, content_line1, content_line2, image, category_category_id } = data;
+  const { title, content_line1, content_line2, image, category_title } = data;
+
+  // Convertir nombre a ID
+  const categoryId = await obtenerCategoryIdPorNombre(category_title);
+  if (!categoryId) {
+    throw new Error(`La categoría '${category_title}' no existe`);
+  }
 
   await db.execute(`
     UPDATE post 
@@ -77,7 +98,7 @@ export const actualizarPublicacion = async (post_id, data) => {
     content_line1,
     content_line2 || null,
     image || null,
-    category_category_id,
+    categoryId,
     post_id
   ]);
 };

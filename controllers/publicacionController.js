@@ -1,10 +1,11 @@
 import { obtenerPublicaciones } from '../models/publicacionModel.js';
 import { ok, internalError,created, badRequest, notFound,forbidden } from '../utils/utils.js';
 import { publicacionSchema } from '../schemas/validatorsPublicacion.js';
-import { crearPublicacion } from '../models/publicacionModel.js';
-import { obtenerPublicacionPorId } from '../models/publicacionModel.js';
-import { actualizarPublicacion, obtenerPublicacionConAutor,eliminarPublicacionYComentarios } from '../models/publicacionModel.js';
+import { actualizarPublicacion, obtenerPublicacionConAutor,eliminarPublicacionYComentarios,obtenerPublicacionPorId,crearPublicacion } from '../models/publicacionModel.js';
 
+// Controlador para manejar las publicaciones
+// Obtiene todas las publicaciones
+// No requiere autenticación
 export const getPublicaciones = async (req, res) => {
   try {
     const publicaciones = await obtenerPublicaciones();
@@ -14,28 +15,39 @@ export const getPublicaciones = async (req, res) => {
     return res.status(500).json(internalError('Error al obtener publicaciones', error.message));
   }
 };
+
+// Crea una nueva publicación
+// Requiere autenticación (verifyToken)
 export const postPublicacion = async (req, res) => {
   try {
     const parsed = publicacionSchema.safeParse(req.body);
-
     if (!parsed.success) {
       return res.status(400).json(badRequest('Datos inválidos', parsed.error.flatten()));
     }
 
+    // parsed.data debe contener: title, content_line1, content_line2?, image?, category_title
     const data = parsed.data;
 
     await crearPublicacion({
-      ...data,
-      user_user_id: Buffer.from(req.user.user_id, 'hex') // UUID binario
+      ...data,                      // incluye category_title
+      user_user_id: req.user.user_id_bin // UUID binario desde verifyToken
     });
 
     return res.status(201).json(created('Publicación creada exitosamente'));
-
   } catch (error) {
-    console.error(error);
+    // Si el modelo lanzó error porque no existe la categoría
+    if (String(error?.message || '').includes('La categoría')) {
+      return res.status(400).json(badRequest(error.message));
+    }
+    console.error('Error al crear publicación:', error);
     return res.status(500).json(internalError('Error al crear la publicación', error.message));
   }
 };
+
+// Obtiene una publicación por ID
+// No requiere autenticación
+// Devuelve 404 si no existe
+// Devuelve 400 si el ID es inválido
 export const getPublicacionPorId = async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -55,10 +67,13 @@ export const getPublicacionPorId = async (req, res) => {
   }
 };
 
+// Actualiza una publicación por ID
+// Requiere autenticación (verifyToken)
+// Devuelve 404 si no existe
 export const putPublicacion = async (req, res) => {
   try {
-    const post_id = parseInt(req.params.id);
-    if (isNaN(post_id)) {
+    const post_id = Number.parseInt(req.params.id, 10);
+    if (Number.isNaN(post_id)) {
       return res.status(400).json(badRequest('ID inválido'));
     }
 
@@ -72,17 +87,21 @@ export const putPublicacion = async (req, res) => {
       return res.status(404).json(notFound('Publicación no encontrada'));
     }
 
-    const autorBinario = publicacion.user_user_id;
-    const usuarioSolicitante = req.user.user_id_bin;
-
+    // Verificar autoría
+    const autorBinario = publicacion.user_user_id;   // BINARY(16) desde DB
+    const usuarioSolicitante = req.user.user_id_bin; // BINARY(16) desde verifyToken
     if (!autorBinario.equals(usuarioSolicitante)) {
       return res.status(403).json(forbidden('No tienes permiso para editar esta publicación'));
     }
 
+    // parsed.data incluye category_title; el modelo lo convierte a category_id
     await actualizarPublicacion(post_id, parsed.data);
-    return res.status(200).json(ok('Publicación actualizada exitosamente'));
 
+    return res.status(200).json(ok('Publicación actualizada exitosamente'));
   } catch (error) {
+    if (String(error?.message || '').includes('La categoría')) {
+      return res.status(400).json(badRequest(error.message));
+    }
     console.error('Error al actualizar publicación:', error);
     return res.status(500).json(internalError('Error del servidor', error.message));
   }
@@ -90,8 +109,9 @@ export const putPublicacion = async (req, res) => {
 
 
 
-
-
+// Elimina una publicación por ID
+// Requiere autenticación (verifyToken)
+// Devuelve 404 si no existe
 export const deletePublicacion = async (req, res) => {
   try {
     const post_id = parseInt(req.params.id, 10);
