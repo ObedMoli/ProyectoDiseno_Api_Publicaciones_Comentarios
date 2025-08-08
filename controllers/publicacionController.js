@@ -3,7 +3,7 @@ import { ok, internalError,created, badRequest, notFound,forbidden } from '../ut
 import { publicacionSchema } from '../schemas/validatorsPublicacion.js';
 import { crearPublicacion } from '../models/publicacionModel.js';
 import { obtenerPublicacionPorId } from '../models/publicacionModel.js';
-import { actualizarPublicacion, obtenerPublicacionConAutor } from '../models/publicacionModel.js';
+import { actualizarPublicacion, obtenerPublicacionConAutor,eliminarPublicacionYComentarios } from '../models/publicacionModel.js';
 
 export const getPublicaciones = async (req, res) => {
   try {
@@ -84,6 +84,42 @@ export const putPublicacion = async (req, res) => {
 
   } catch (error) {
     console.error('Error al actualizar publicación:', error);
+    return res.status(500).json(internalError('Error del servidor', error.message));
+  }
+};
+
+
+
+
+
+export const deletePublicacion = async (req, res) => {
+  try {
+    const post_id = parseInt(req.params.id, 10);
+    if (Number.isNaN(post_id)) {
+      return res.status(400).json(badRequest('ID inválido'));
+    }
+
+    const pub = await obtenerPublicacionConAutor(post_id);
+    if (!pub) {
+      return res.status(404).json(notFound('Publicación no encontrada'));
+    }
+
+    // Verifica que el autor (BINARY) sea el mismo que el usuario autenticado
+    const autorBin = pub.user_user_id;              // BINARY(16) desde DB
+    const solicitanteBin = req.user.user_id_bin;    // BINARY(16) desde verifyToken
+
+    if (!autorBin.equals(solicitanteBin)) {
+      return res.status(403).json(forbidden('No tienes permiso para eliminar esta publicación'));
+    }
+
+    const affected = await eliminarPublicacionYComentarios(post_id);
+    if (affected === 0) {
+      return res.status(404).json(notFound('Publicación no encontrada'));
+    }
+
+    return res.status(200).json(ok('Publicación eliminada correctamente'));
+  } catch (error) {
+    console.error('Error al eliminar publicación:', error);
     return res.status(500).json(internalError('Error del servidor', error.message));
   }
 };

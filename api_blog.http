@@ -18,7 +18,7 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "ob@gmail.com",
+  "email": "obed@gmail.com",
   "password": "123456789"
 }
 
@@ -32,10 +32,10 @@ Accept: application/json
 ### Crear una nueva publicación
 POST http://localhost:3000/api/publicaciones
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTQwOTE3ZDg1MDIzNGZjYWEwNTE3ZjA3MDZmOWU4ZTAiLCJuYW1lIjoiZWJlIiwiaWF0IjoxNzU0NTI2MjkzLCJleHAiOjE3NTQ1Mjk4OTN9.8SaQX8VvctbBoaomwbTbznDRK1TaGGb_v0AYI8xkXF0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY3ODMxMiwiZXhwIjoxNzU0NjgxOTEyfQ.FOucklEwCQUj9At5xaMEHDwxqGTBZvoxidxeen9Wry4
 
 {
-  "title": "Mi tercer post",
+  "title": "Mi quinto post",
   "content_line1": "Contenido principal",
   "content_line2": "Más detalles opcionales",
   "image": "https://via.placeholder.com/150",
@@ -72,3 +72,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTQwO
 {
   "content": "Este es un comentario de prueba"
 }
+
+### Eliminar publicación (autor autenticado)
+DELETE http://localhost:3000/api/publicaciones/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY3ODMxMiwiZXhwIjoxNzU0NjgxOTEyfQ.FOucklEwCQUj9At5xaMEHDwxqGTBZvoxidxeen9Wry4

@@ -81,3 +81,24 @@ export const actualizarPublicacion = async (post_id, data) => {
     post_id
   ]);
 };
+
+
+
+// Eliminar publicación (y sus comentarios primero para no romper FK)
+export const eliminarPublicacionYComentarios = async (post_id) => {
+  const conn = await db.getConnection();
+  try {
+    await conn.beginTransaction();
+
+    await conn.execute('DELETE FROM comment WHERE post_post_id = ?', [post_id]);
+    const [result] = await conn.execute('DELETE FROM post WHERE post_id = ?', [post_id]);
+
+    await conn.commit();
+    return result.affectedRows; // 1 si eliminó, 0 si no existía
+  } catch (err) {
+    await conn.rollback();
+    throw err;
+  } finally {
+    conn.release();
+  }
+};
