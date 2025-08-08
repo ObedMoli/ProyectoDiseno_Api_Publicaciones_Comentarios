@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import { createUser, getUserByEmail, assingnUserRole, getRoleByName } from '../models/user_model.js';
 import { registerSchema, validateLogin } from '../schemas/validators_user.js';
-import { conflict, created, ok, unauthorized, badRequest } from '../utils/utils.js';
+import { ok, unauthorized, badRequest } from '../utils/utils.js';
 
 export const register = async (req, res, next) => {
 
@@ -85,7 +85,7 @@ export const login = async (req, res, next) => {
 
        res.setHeader('Authorization', `Bearer ${token}`);
 
-        res.status(201).json(ok('Inicio de sesión exitoso',{ token }));
+        res.status(200).json(ok('Inicio de sesión exitoso',{ token }));
         
     } catch (error) {
         next(error);

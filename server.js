@@ -13,8 +13,10 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-//Usuarios routes
+
 app.use('/api/auth', authRoutes);
+
+// Roles routes
 app.use('/api/roles', roleRoutes);
 
 // Publicaciones routes

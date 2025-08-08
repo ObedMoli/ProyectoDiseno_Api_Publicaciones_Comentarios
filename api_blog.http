@@ -1,5 +1,4 @@
 ### Registro de usuario
-
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
@@ -13,7 +12,6 @@ Content-Type: application/json
 }
 
 ### Inicio de sesión
-
 POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
@@ -22,44 +20,46 @@ Content-Type: application/json
   "password": "123456789"
 }
 
+
 ### Obtener publicaciones
 GET http://localhost:3000/api/publicaciones
 Accept: application/json
+
+
 ### Obtener una publicación específica
 GET http://localhost:3000/api/publicaciones/1
 Accept: application/json
 
 
-
 ### Crear una nueva publicación
 POST http://localhost:3000/api/publicaciones
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY4NjczNCwiZXhwIjoxNzU0NjkwMzM0fQ.-jY_STnFNT53gwFOerlEgFHBCpKgbAmYDwUb0wygb9c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDY5NTc5ZTVmZGJhNDkxZDk5ZTJjMzgxOTc3YTllZjEiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY2MjQ4MywiZXhwIjoxNzU0NjY2MDgzfQ.Cc3n7pOZAUhFOTSjkDve1HqLF-LZk9rVbnuNKt8xv0U
 
 {
-  "title": "Mi sexto post",
-  "content_line1": "Contenido principal",
+  "title": "Hola Mundo",
+  "content_line1": "Contenido",
   "content_line2": "Más detalles opcionales",
   "image": "https://via.placeholder.com/150",
   "category_title": "Educacion"
 }
 
 ### Actualizar una publicación existente (requiere token)///Categorias validas: Tecnologia, Salud, Educacion, Viajes,Cultura
-PUT http://localhost:3000/api/publicaciones/6
+PUT http://localhost:3000/api/publicaciones/5
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY4NjczNCwiZXhwIjoxNzU0NjkwMzM0fQ.-jY_STnFNT53gwFOerlEgFHBCpKgbAmYDwUb0wygb9c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDY5NTc5ZTVmZGJhNDkxZDk5ZTJjMzgxOTc3YTllZjEiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY2MjQ4MywiZXhwIjoxNzU0NjY2MDgzfQ.Cc3n7pOZAUhFOTSjkDve1HqLF-LZk9rVbnuNKt8xv0U
 
 {
-  "title": "Actualización de mi cuarto post",
-  "content_line1": "Nuevo contenido principal",
-  "content_line2": "Línea secundaria actualizada",
-  "image": "https://via.placeholder.com/300",
-  "category_title": "Salud" 
+  "title": "Hola Mundo Actualizado",
+  "content_line1": "Contenido actualizado",
+  "content_line2": "Más detalles opcionales",
+  "image": "https://via.placeholder.com/150",
+  "category_title": "Educacion"
 }
 
 ### Eliminar publicación (autor autenticado)
-DELETE http://localhost:3000/api/publicaciones/4
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY3ODY4NywiZXhwIjoxNzU0NjgyMjg3fQ.YIdsN26Q2B2vctKJpGJCsKJuRDMrbKIyZLY8wmgrgx0
+DELETE http://localhost:3000/api/publicaciones/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDY5NTc5ZTVmZGJhNDkxZDk5ZTJjMzgxOTc3YTllZjEiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY0NjIyOCwiZXhwIjoxNzU0NjQ5ODI4fQ.BxvrRUuRe5eChdQtDUv5WOjKOhN_oPOQQcBoXLcVgNY
 
 
 ### Obtener todos los comentarios del sistema (público)
@@ -68,16 +68,16 @@ Content-Type: application/json
 
 
 ### Obtener comentarios de una publicación específica (público)
-GET http://localhost:3000/api/publicaciones/3/comentarios
+GET http://localhost:3000/api/publicaciones/5/comentarios
 Content-Type: application/json
 
 
 ### Publicar un nuevo comentario (requiere token)
-POST http://localhost:3000/api/publicaciones/1/comentarios
+POST http://localhost:3000/api/publicaciones/5/comentarios
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiOTg1NTE4MTUzMDYyNDc5MWI4ZTE2NTQxNTJjOGVlMjAiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY4NTEyOCwiZXhwIjoxNzU0Njg4NzI4fQ.dp2gTh6JiGxSnlWbRMEyS4xIKYbb_Ip4EBlAxSDca3I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDY5NTc5ZTVmZGJhNDkxZDk5ZTJjMzgxOTc3YTllZjEiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY2MjQ4MywiZXhwIjoxNzU0NjY2MDgzfQ.Cc3n7pOZAUhFOTSjkDve1HqLF-LZk9rVbnuNKt8xv0U
 
 {
-  "content": "Este es un comentario de prueba"
+  "content": "Este es otro comentario de prueba"
 }
 
