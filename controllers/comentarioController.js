@@ -39,7 +39,7 @@ export const publicarComentario = async (req, res) => {
       comment_by_user_name: req.user.name,
       content: content.trim(),
       post_post_id: postId,
-      user_user_id: req.user.user_id
+      user_user_id: req.user.user_id_bin
     };
 
     await crearComentario(comentario);

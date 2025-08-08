@@ -32,7 +32,7 @@ Accept: application/json
 ### Crear una nueva publicación
 POST http://localhost:3000/api/publicaciones
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY3ODMxMiwiZXhwIjoxNzU0NjgxOTEyfQ.FOucklEwCQUj9At5xaMEHDwxqGTBZvoxidxeen9Wry4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiOTg1NTE4MTUzMDYyNDc5MWI4ZTE2NTQxNTJjOGVlMjAiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY4NTEyOCwiZXhwIjoxNzU0Njg4NzI4fQ.dp2gTh6JiGxSnlWbRMEyS4xIKYbb_Ip4EBlAxSDca3I
 
 {
   "title": "Mi quinto post",
@@ -71,8 +71,9 @@ Content-Type: application/json
 
 
 ### Publicar un nuevo comentario (requiere token)
-POST http://localhost:3000/api/publicaciones/3/comentarios
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTQwOTE3ZDg1MDIzNGZjYWEwNTE3ZjA3MDZmOWU4ZTAiLCJuYW1lIjoiZWJlIiwiaWF0IjoxNzU0NTI2MjkzLCJleHAiOjE3NTQ1Mjk4OTN9.8SaQX8VvctbBoaomwbTbznDRK1TaGGb_v0AYI8xkXF0
+POST http://localhost:3000/api/publicaciones/1/comentarios
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiOTg1NTE4MTUzMDYyNDc5MWI4ZTE2NTQxNTJjOGVlMjAiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY4NTEyOCwiZXhwIjoxNzU0Njg4NzI4fQ.dp2gTh6JiGxSnlWbRMEyS4xIKYbb_Ip4EBlAxSDca3I
 
 {
   "content": "Este es un comentario de prueba"

@@ -18,7 +18,7 @@ export const getComentariosByPostId = async (postId) => {
 export const crearComentario = async (comentario) => {
   const { comment_by_user_name, content, post_post_id, user_user_id } = comentario;
   await pool.query(
-    'INSERT INTO comment (comment_by_user_name, content, post_post_id, user_user_id) VALUES (?, ?, ?, UUID_TO_BIN(?))',
+    'INSERT INTO comment (comment_by_user_name, content, post_post_id, user_user_id) VALUES (?, ?, ?, ?)',
     [comment_by_user_name, content, post_post_id, user_user_id]
     );
 };
