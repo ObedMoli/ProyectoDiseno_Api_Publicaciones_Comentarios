@@ -43,17 +43,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1Z
 }
 
 ### Actualizar una publicación existente (requiere token)
-PUT http://localhost:3000/api/publicaciones/1
+PUT http://localhost:3000/api/publicaciones/4
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTQwOTE3ZDg1MDIzNGZjYWEwNTE3ZjA3MDZmOWU4ZTAiLCJuYW1lIjoiZWJlIiwiaWF0IjoxNzU0NTQ1MzA1LCJleHAiOjE3NTQ1NDg5MDV9.TzMbFsYPbwHAoC-5GUH8DmLEJHbl-5bVXVAO9eC3Lo8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY3ODY4NywiZXhwIjoxNzU0NjgyMjg3fQ.YIdsN26Q2B2vctKJpGJCsKJuRDMrbKIyZLY8wmgrgx0
 
 {
-  "title": "Actualización de mi tercer post",
+  "title": "Actualización de mi cuarto post",
   "content_line1": "Nuevo contenido principal",
   "content_line2": "Línea secundaria actualizada",
   "image": "https://via.placeholder.com/300",
   "category_category_id": 2
 }
+
+### Eliminar publicación (autor autenticado)
+DELETE http://localhost:3000/api/publicaciones/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY3ODY4NywiZXhwIjoxNzU0NjgyMjg3fQ.YIdsN26Q2B2vctKJpGJCsKJuRDMrbKIyZLY8wmgrgx0
+
 
 ### Obtener todos los comentarios del sistema (público)
 GET http://localhost:3000/api/comentarios
@@ -73,6 +78,3 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTQwO
   "content": "Este es un comentario de prueba"
 }
 
-### Eliminar publicación (autor autenticado)
-DELETE http://localhost:3000/api/publicaciones/4
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY3ODMxMiwiZXhwIjoxNzU0NjgxOTEyfQ.FOucklEwCQUj9At5xaMEHDwxqGTBZvoxidxeen9Wry4
