@@ -68,7 +68,7 @@ Content-Type: application/json
 
 
 ### Obtener comentarios de una publicación específica (público)
-GET http://localhost:3000/api/publicaciones/1/comentarios
+GET http://localhost:3000/api/publicaciones/3/comentarios
 Content-Type: application/json
 
 
