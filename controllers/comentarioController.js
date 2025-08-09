@@ -27,25 +27,31 @@ export const obtenerComentarios = async (req, res) => {
 };
 
 export const publicarComentario = async (req, res) => {
-  const postId = req.params.id;
-  const { content } = req.body;
-
-  if (!content || content.trim() === '') {
-    return res.status(400).json({ message: 'El contenido del comentario es obligatorio' });
-  }
-
   try {
+    const postId = Number(req.params.id);
+    if (!Number.isInteger(postId)) {
+      return res.status(400).json({ message: 'ID de publicación inválido' });
+    }
+
+    const { content } = req.validated || {};
+    if (!content || content.trim() === '') {
+      return res.status(400).json({ message: 'El contenido del comentario es obligatorio' });
+    }
+
+    const userIdBin = req.user?.user_id_bin;
+    const userName = req.user?.name || 'Usuario';
+
     const comentario = {
-      comment_by_user_name: req.user.name,
-      content: content.trim(),
+      comment_by_user_name: userName,
+      content,
       post_post_id: postId,
-      user_user_id: req.user.user_id_bin
+      user_user_id: userIdBin
     };
 
     await crearComentario(comentario);
-    res.status(201).json({ message: 'Comentario creado correctamente' });
+    return res.status(201).json({ message: 'Comentario creado correctamente' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error al publicar comentario' });
+    return res.status(500).json({ message: 'Error al publicar comentario' });
   }
 };
