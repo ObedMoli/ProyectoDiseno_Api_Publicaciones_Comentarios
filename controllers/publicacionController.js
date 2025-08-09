@@ -2,7 +2,7 @@ import { obtenerPublicaciones } from '../models/publicacionModel.js';
 import { ok, internalError,created, badRequest, notFound,forbidden } from '../utils/utils.js';
 import { publicacionSchema } from '../schemas/validatorsPublicacion.js';
 import { actualizarPublicacion, obtenerPublicacionConAutor,eliminarPublicacionYComentarios,obtenerPublicacionPorId,crearPublicacion } from '../models/publicacionModel.js';
-
+import { getComentariosByPostId } from '../models/comentarioModel.js';
 // Controlador para manejar las publicaciones
 // Obtiene todas las publicaciones
 // No requiere autenticación
@@ -59,6 +59,12 @@ export const getPublicacionPorId = async (req, res) => {
     if (!publicacion) {
       return res.status(404).json(notFound('Publicación no encontrada'));
     }
+
+    // Obtener comentarios relacionados
+    const comentarios = await getComentariosByPostId(id);
+
+    // Agregar comentarios al objeto publicación
+    publicacion.comentarios = comentarios;
 
     return res.status(200).json(ok('Publicación encontrada', publicacion));
   } catch (error) {
