@@ -3,6 +3,7 @@ import { ok, internalError,created, badRequest, notFound,forbidden } from '../ut
 import { publicacionSchema } from '../schemas/validatorsPublicacion.js';
 import { actualizarPublicacion, obtenerPublicacionConAutor,eliminarPublicacionYComentarios,obtenerPublicacionPorId,crearPublicacion,obtenerCategorias, obtenerPublicacionesPaginadas} from '../models/publicacionModel.js';
 import { getComentariosByPostId } from '../models/comentarioModel.js';
+
 // Controlador para manejar las publicaciones
 // Obtiene todas las publicaciones
 // No requiere autenticación
@@ -38,7 +39,7 @@ export const postPublicacion = async (req, res) => {
       return res.status(400).json(badRequest('Datos inválidos', parsed.error.errors));
     }
 
-    const data = parsed.data; // content_line2 e image ya vienen en null si estaban vacíos
+    const data = parsed.data; 
 
     await crearPublicacion({
       ...data,
@@ -108,7 +109,7 @@ export const putPublicacion = async (req, res) => {
       return res.status(403).json(forbidden('No tienes permiso para editar esta publicación'));
     }
 
-    await actualizarPublicacion(post_id, parsed.data); // image/content_line2 ya normalizados
+    await actualizarPublicacion(post_id, parsed.data); 
     return res.status(200).json(ok('Publicación actualizada exitosamente'));
   } catch (error) {
     console.error('Error al actualizar publicación:', error);

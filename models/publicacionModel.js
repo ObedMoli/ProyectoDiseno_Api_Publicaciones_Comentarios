@@ -124,7 +124,7 @@ export const eliminarPublicacionYComentarios = async (post_id) => {
     const [result] = await conn.execute('DELETE FROM post WHERE post_id = ?', [post_id]);
 
     await conn.commit();
-    return result.affectedRows; // 1 si eliminó, 0 si no existía
+    return result.affectedRows; 
   } catch (err) {
     await conn.rollback();
     throw err;
@@ -162,7 +162,7 @@ export const obtenerPublicacionesPaginadas = async ({ q = '', category = '', pag
   );
   const total = countRows[0]?.total ?? 0;
 
-  // data (asegurar enteros y NO usar placeholders en LIMIT/OFFSET)
+  // paginación
   const pageN = Math.max(1, Number(page) || 1);
   const sizeN = Math.min(50, Math.max(1, Number(pageSize) || 10));
   const offset = (pageN - 1) * sizeN;
@@ -183,7 +183,7 @@ export const obtenerPublicacionesPaginadas = async ({ q = '', category = '', pag
      ${whereSql}
      ORDER BY p.date DESC
      LIMIT ${sizeN} OFFSET ${offset}`,
-    params // ¡OJO! aquí solo van los params de filtros (q/category); LIMIT/OFFSET ya van interpolados
+    params 
   );
 
   return { items, total };
