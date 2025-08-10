@@ -22,24 +22,19 @@ export const postPublicacion = async (req, res) => {
   try {
     const parsed = publicacionSchema.safeParse(req.body);
     if (!parsed.success) {
-      return res.status(400).json(badRequest('Datos inválidos', parsed.error.flatten()));
+      return res.status(400).json(badRequest('Datos inválidos', parsed.error.errors));
     }
 
-    // parsed.data debe contener: title, content_line1, content_line2?, image?, category_title
-    const data = parsed.data;
+    const data = parsed.data; // content_line2 e image ya vienen en null si estaban vacíos
 
     await crearPublicacion({
-      ...data,                      // incluye category_title
-      user_user_id: req.user.user_id_bin // UUID binario desde verifyToken
+      ...data,
+      user_user_id: Buffer.from(req.user.user_id, 'hex'),
     });
 
     return res.status(201).json(created('Publicación creada exitosamente'));
   } catch (error) {
-    // Si el modelo lanzó error porque no existe la categoría
-    if (String(error?.message || '').includes('La categoría')) {
-      return res.status(400).json(badRequest(error.message));
-    }
-    console.error('Error al crear publicación:', error);
+    console.error(error);
     return res.status(500).json(internalError('Error al crear la publicación', error.message));
   }
 };
@@ -85,7 +80,7 @@ export const putPublicacion = async (req, res) => {
 
     const parsed = publicacionSchema.safeParse(req.body);
     if (!parsed.success) {
-      return res.status(400).json(badRequest('Datos inválidos', parsed.error.flatten()));
+      return res.status(400).json(badRequest('Datos inválidos', parsed.error.errors));
     }
 
     const publicacion = await obtenerPublicacionConAutor(post_id);
@@ -93,21 +88,15 @@ export const putPublicacion = async (req, res) => {
       return res.status(404).json(notFound('Publicación no encontrada'));
     }
 
-    // Verificar autoría
-    const autorBinario = publicacion.user_user_id;   // BINARY(16) desde DB
-    const usuarioSolicitante = req.user.user_id_bin; // BINARY(16) desde verifyToken
+    const autorBinario = publicacion.user_user_id;
+    const usuarioSolicitante = req.user.user_id_bin;
     if (!autorBinario.equals(usuarioSolicitante)) {
       return res.status(403).json(forbidden('No tienes permiso para editar esta publicación'));
     }
 
-    // parsed.data incluye category_title; el modelo lo convierte a category_id
-    await actualizarPublicacion(post_id, parsed.data);
-
+    await actualizarPublicacion(post_id, parsed.data); // image/content_line2 ya normalizados
     return res.status(200).json(ok('Publicación actualizada exitosamente'));
   } catch (error) {
-    if (String(error?.message || '').includes('La categoría')) {
-      return res.status(400).json(badRequest(error.message));
-    }
     console.error('Error al actualizar publicación:', error);
     return res.status(500).json(internalError('Error del servidor', error.message));
   }
