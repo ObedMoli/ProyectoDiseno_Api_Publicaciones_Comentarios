@@ -35,13 +35,13 @@ Accept: application/json
 ### Crear una nueva publicación
 POST http://localhost:3000/api/publicaciones
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDY5NTc5ZTVmZGJhNDkxZDk5ZTJjMzgxOTc3YTllZjEiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY2MjQ4MywiZXhwIjoxNzU0NjY2MDgzfQ.Cc3n7pOZAUhFOTSjkDve1HqLF-LZk9rVbnuNKt8xv0U
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDgwNDgxOSwiZXhwIjoxNzU0ODA4NDE5fQ.yJX-OQaDCSpnn8sZjnJ4mzo2E8fXVecBeinScni5WbM
 
 {
   "title": "Hola Mundo",
   "content_line1": "Contenido",
-  "content_line2": "Más detalles opcionales",
-  "image": "https://via.placeholder.com/150",
+  "content_line2": " ",
+  "image": "",
   "category_title": "Educacion"
 }
 

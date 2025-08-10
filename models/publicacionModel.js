@@ -33,27 +33,27 @@ export const obtenerPublicaciones = async () => {
 export const crearPublicacion = async (post) => {
   const { title, content_line1, content_line2, image, category_title, user_user_id } = post;
 
-  // Convertir nombre a ID
-  const categoryId = await obtenerCategoryIdPorNombre(category_title);
-  if (!categoryId) {
-    throw new Error(`La categoría '${category_title}' no existe`);
+  // resolver category_id por title
+  const [[cat]] = await db.execute(
+    'SELECT category_id FROM category WHERE category_title = ?',
+    [category_title]
+  );
+  if (!cat) {
+    throw new Error('La categoría no existe');
   }
 
-  const query = `
-    INSERT INTO post (title, content_line1, content_line2, image, category_category_id, user_user_id)
-    VALUES (?, ?, ?, ?, ?, ?)
-  `;
-
-  const values = [
-    title,
-    content_line1,
-    content_line2 || null,
-    image || null,
-    categoryId,
-    user_user_id
-  ];
-
-  await db.execute(query, values);
+  await db.execute(
+    `INSERT INTO post (title, content_line1, content_line2, image, category_category_id, user_user_id)
+     VALUES (?, ?, ?, ?, ?, ?)`,
+    [
+      title,
+      content_line1,
+      content_line2 ?? null,
+      image ?? null,
+      cat.category_id,
+      user_user_id
+    ]
+  );
 };
 
 /// Obtiene una publicación por su ID, incluyendo autor y categoría
@@ -82,28 +82,33 @@ export const obtenerPublicacionConAutor = async (post_id) => {
   `, [post_id]);
   return rows[0];
 };
+
+
 /// Actualiza una publicación existente por su ID
 export const actualizarPublicacion = async (post_id, data) => {
   const { title, content_line1, content_line2, image, category_title } = data;
 
-  // Convertir nombre a ID
-  const categoryId = await obtenerCategoryIdPorNombre(category_title);
-  if (!categoryId) {
-    throw new Error(`La categoría '${category_title}' no existe`);
+  const [[cat]] = await db.execute(
+    'SELECT category_id FROM category WHERE category_title = ?',
+    [category_title]
+  );
+  if (!cat) {
+    throw new Error('La categoría no existe');
   }
 
-  await db.execute(`
-    UPDATE post 
-    SET title = ?, content_line1 = ?, content_line2 = ?, image = ?, category_category_id = ?
-    WHERE post_id = ?
-  `, [
-    title,
-    content_line1,
-    content_line2 || null,
-    image || null,
-    categoryId,
-    post_id
-  ]);
+  await db.execute(
+    `UPDATE post
+     SET title = ?, content_line1 = ?, content_line2 = ?, image = ?, category_category_id = ?
+     WHERE post_id = ?`,
+    [
+      title,
+      content_line1,
+      content_line2 ?? null,
+      image ?? null,
+      cat.category_id,
+      post_id
+    ]
+  );
 };
 
 
