@@ -1,18 +1,31 @@
 import { obtenerPublicaciones } from '../models/publicacionModel.js';
 import { ok, internalError,created, badRequest, notFound,forbidden } from '../utils/utils.js';
 import { publicacionSchema } from '../schemas/validatorsPublicacion.js';
-import { actualizarPublicacion, obtenerPublicacionConAutor,eliminarPublicacionYComentarios,obtenerPublicacionPorId,crearPublicacion,obtenerCategorias } from '../models/publicacionModel.js';
+import { actualizarPublicacion, obtenerPublicacionConAutor,eliminarPublicacionYComentarios,obtenerPublicacionPorId,crearPublicacion,obtenerCategorias, obtenerPublicacionesPaginadas} from '../models/publicacionModel.js';
 import { getComentariosByPostId } from '../models/comentarioModel.js';
 // Controlador para manejar las publicaciones
 // Obtiene todas las publicaciones
 // No requiere autenticación
 export const getPublicaciones = async (req, res) => {
   try {
-    const publicaciones = await obtenerPublicaciones();
-    return res.status(200).json(ok('Lista de publicaciones', publicaciones));
-  } catch (error) {
-    console.error('Error al obtener publicaciones:', error);
-    return res.status(500).json(internalError('Error al obtener publicaciones', error.message));
+    const q = (req.query.q || '').trim();
+    const category = (req.query.category || '').trim(); // por nombre de categoría
+    const page = Math.max(1, parseInt(req.query.page || '1', 10));
+    const pageSize = Math.min(50, Math.max(1, parseInt(req.query.pageSize || '10', 10)));
+
+    const { items, total } = await obtenerPublicacionesPaginadas({ q, category, page, pageSize });
+    const totalPages = Math.max(1, Math.ceil(total / pageSize));
+
+    return res.status(200).json(ok('Lista de publicaciones', {
+      items,
+      page,
+      pageSize,
+      total,
+      totalPages
+    }));
+  } catch (e) {
+    console.error('Error al obtener publicaciones:', e);
+    return res.status(500).json(internalError('Error al obtener publicaciones', e.message));
   }
 };
 
@@ -38,6 +51,7 @@ export const postPublicacion = async (req, res) => {
     return res.status(500).json(internalError('Error al crear la publicación', error.message));
   }
 };
+
 
 // Obtiene una publicación por ID
 // No requiere autenticación

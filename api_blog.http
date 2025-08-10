@@ -21,9 +21,17 @@ Content-Type: application/json
 }
 
 
-### Obtener publicaciones
-GET http://localhost:3000/api/publicaciones
-Accept: application/json
+### Obtener publicaciones paginadas y filtradas
+@base = http://localhost:3000/api
+
+### Página 1 (5 por página)
+GET {{base}}/publicaciones?page=1&pageSize=5
+
+### Con búsqueda
+GET {{base}}/publicaciones?q=react&page=1&pageSize=5
+
+### Filtrar por categoría (por nombre)
+GET {{base}}/publicaciones?category=Tecnologia&page=1&pageSize=5
 
 
 
