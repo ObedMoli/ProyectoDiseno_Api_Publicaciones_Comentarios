@@ -18,7 +18,7 @@ app.use('/api/auth', authRoutes);
 
 // Publicaciones routes
 app.use('/api/publicaciones', publicacionRoutes);
-
+app.use('/api/categorias', publicacionRoutes);
 // Comentarios routes
 app.use('/api', comentarioRoutes);
 

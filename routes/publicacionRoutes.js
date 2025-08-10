@@ -10,5 +10,5 @@ router.post('/', verifyToken, postPublicacion); // POST /api/publicaciones
 router.get('/:id', getPublicacionPorId);    // GET /api/publicaciones/:id
 router.put('/:id', verifyToken, putPublicacion); // PUT /api/publicaciones/:id
 router.delete('/:id', verifyToken, deletePublicacion); // DELETE /api/publicaciones/:id
-router.get('categorias/', getCategorias); // GET /api/categorias
+router.get('/categoria/:id', getCategorias); // GET /api/categorias
 export default router;
