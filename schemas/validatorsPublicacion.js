@@ -8,7 +8,7 @@ const emptyToNull = (v) => {
 export const publicacionSchema = z.object({
   title: z.string().min(3),
   content_line1: z.string().min(3),
-  content_line2: z.string().nullable() ,
-  image: z.string().url().nullable(),
+  content_line2: z.string().optional(),
+  image: z.string().url().optional(),
   category_title: z.string()
 });
