@@ -108,6 +108,7 @@ export const actualizarPublicacion = async (post_id, data) => {
 
 
 
+
 // Eliminar publicación (y sus comentarios primero para no romper FK)
 export const eliminarPublicacionYComentarios = async (post_id) => {
   const conn = await db.getConnection();
@@ -126,3 +127,14 @@ export const eliminarPublicacionYComentarios = async (post_id) => {
     conn.release();
   }
 };
+
+
+export const obtenerCategorias = async () => {
+  const [rows] = await db.execute(
+    'SELECT category_id, category_title, category_description FROM category ORDER BY category_title ASC'
+  );
+  return rows;
+};
+
+
+

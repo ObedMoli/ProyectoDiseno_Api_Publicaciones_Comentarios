@@ -2,7 +2,6 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import authRoutes from './routes/auth_routes.js';
-import roleRoutes from './routes/routasroles.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import publicacionRoutes from './routes/publicacionRoutes.js';
 import comentarioRoutes from './routes/comentarioRoutes.js';
@@ -13,11 +12,9 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-
+// Auth routes
 app.use('/api/auth', authRoutes);
 
-// Roles routes
-app.use('/api/roles', roleRoutes);
 
 // Publicaciones routes
 app.use('/api/publicaciones', publicacionRoutes);

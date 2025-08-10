@@ -1,7 +1,7 @@
 import { obtenerPublicaciones } from '../models/publicacionModel.js';
 import { ok, internalError,created, badRequest, notFound,forbidden } from '../utils/utils.js';
 import { publicacionSchema } from '../schemas/validatorsPublicacion.js';
-import { actualizarPublicacion, obtenerPublicacionConAutor,eliminarPublicacionYComentarios,obtenerPublicacionPorId,crearPublicacion } from '../models/publicacionModel.js';
+import { actualizarPublicacion, obtenerPublicacionConAutor,eliminarPublicacionYComentarios,obtenerPublicacionPorId,crearPublicacion,obtenerCategorias } from '../models/publicacionModel.js';
 import { getComentariosByPostId } from '../models/comentarioModel.js';
 // Controlador para manejar las publicaciones
 // Obtiene todas las publicaciones
@@ -147,5 +147,17 @@ export const deletePublicacion = async (req, res) => {
   } catch (error) {
     console.error('Error al eliminar publicación:', error);
     return res.status(500).json(internalError('Error del servidor', error.message));
+  }
+};
+
+// Obtiene todas las categorías disponibles
+// No requiere autenticación
+export const getCategorias = async (req, res) => {
+  try {
+    const cats = await obtenerCategorias();
+    return res.status(200).json(ok('Lista de categorías', cats));
+  } catch (e) {
+    console.error('Error al obtener categorías:', e);
+    return res.status(500).json(internalError('Error al obtener categorías', e.message));
   }
 };

@@ -25,6 +25,9 @@ Content-Type: application/json
 GET http://localhost:3000/api/publicaciones
 Accept: application/json
 
+### Obtener categorías disponibles
+GET http://localhost:3000/api/publicaciones/categorias/1
+Accept: application/json
 
 ### Obtener una publicación específica
 GET http://localhost:3000/api/publicaciones/1
