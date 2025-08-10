@@ -38,10 +38,10 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDgwNDgxOSwiZXhwIjoxNzU0ODA4NDE5fQ.yJX-OQaDCSpnn8sZjnJ4mzo2E8fXVecBeinScni5WbM
 
 {
-  "title": "Hola Mundo",
+  "title": "Hola Mundo2",
   "content_line1": "Contenido",
-  "content_line2": " ",
-  "image": "",
+  "content_line2": null,
+  "image": null,
   "category_title": "Educacion"
 }
 
