@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
-import { createUser, getUserByEmail, assingnUserRole, getRoleByName } from '../models/user_model.js';
+import { createUser, getUserByEmail, assingnUserRole, getRoleByName, getUserByName } from '../models/user_model.js';
 import { registerSchema, validateLogin } from '../schemas/validators_user.js';
 import { ok, unauthorized, badRequest } from '../utils/utils.js';
 
@@ -29,7 +29,7 @@ export const register = async (req, res, next) => {
             return res.status(400).json({ message: 'El correo electrónico ya está en uso' });
         }
 
-        const existingName = await getUserByEmail(name);
+        const existingName = await getUserByName(name);
         if (existingName) {
             return res.status(400).json({ message: 'El nombre de usuario ya está en uso' });
         }
