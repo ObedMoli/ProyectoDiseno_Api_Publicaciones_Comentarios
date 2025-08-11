@@ -5,6 +5,11 @@ export const getUserByEmail = async (email) => {
     return rows[0];
 };
 
+export const getUserByName = async (name) => {
+    const [rows] = await pool.query('SELECT * FROM user WHERE name = ?', [name]);
+    return rows[0];
+}
+
 export const getUserById = async (id) => {
     const [rows] = await pool.query('SELECT * FROM user WHERE user_id = ?', [id]);
     return rows[0];

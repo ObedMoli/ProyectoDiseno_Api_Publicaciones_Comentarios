@@ -29,6 +29,11 @@ export const register = async (req, res, next) => {
             return res.status(400).json({ message: 'El correo electrónico ya está en uso' });
         }
 
+        const existingName = await getUserByEmail(name);
+        if (existingName) {
+            return res.status(400).json({ message: 'El nombre de usuario ya está en uso' });
+        }
+
         const role = await getRoleByName(role_name);
         if (!role) {
             return res.status(400).json({ message: 'El rol no existe' });
@@ -44,6 +49,10 @@ export const register = async (req, res, next) => {
         res.status(201).json({ message: 'Usuario creado exitosamente' });
 
     } catch (error) {
+        if (error.code === 'ER_DUP_ENTRY') {
+            return res.status(400).json({ message: 'El correo electrónico o nombre de usuario ya está en uso' });
+        }
+        
         next(error);
     }
 
