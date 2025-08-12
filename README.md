@@ -1,9 +1,9 @@
 # API de Publicaciones y Comentarios – Blog Personal
 # Integrantes
 
-  Obed Esau Molina Sandoval  20151023801	
-  Saubdy Lucia Ramirez Ochoa 20172400114
-  Jorge Luis Reyes Cruz      20182001662
+  - Obed Esau Molina Sandoval  20151023801	
+  - Saubdy Lucia Ramirez Ochoa 20172400114
+  - Jorge Luis Reyes Cruz      20182001662
 ## 📌 Descripción
 
 Esta API RESTful permite gestionar publicaciones tipo blog y comentarios asociados. Está desarrollada con **Node.js** y **Express**, usa **MySQL** como base de datos y sigue el patrón **MVC**.  
