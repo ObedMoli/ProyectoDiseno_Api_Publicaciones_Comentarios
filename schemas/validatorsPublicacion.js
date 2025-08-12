@@ -1,5 +1,5 @@
 import { z } from 'zod';
-
+// Se usa para validar los datos de entrada en las rutas de creación y actualización de publicaciones
 const emptyToNull = (v) => {
   if (v === '' || v === undefined || v === null) return null;
   return String(v).trim();

@@ -167,7 +167,7 @@ export const obtenerPublicacionesPaginadas = async ({ q = '', category = '', pag
   const sizeN = Math.min(50, Math.max(1, Number(pageSize) || 10));
   const offset = (pageN - 1) * sizeN;
 
-  const [items] = await db.query( // usa query en lugar de execute para esta parte
+  const [items] = await db.query( 
     `SELECT
        p.post_id,
        p.title,

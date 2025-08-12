@@ -2,7 +2,7 @@ import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
 
 dotenv.config();
-
+// Configuración de la conexión a la base de datos
 const db=await mysql.createPool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,

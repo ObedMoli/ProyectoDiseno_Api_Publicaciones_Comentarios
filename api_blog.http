@@ -17,7 +17,7 @@ Content-Type: application/json
 
 {
   "email": "obed@gmail.com",
-  "password": "123456789"
+  "password": "12345789"
 }
 
 
@@ -45,23 +45,23 @@ Accept: application/json
 ### Crear una nueva publicación
 POST http://localhost:3000/api/publicaciones
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDgwNDgxOSwiZXhwIjoxNzU0ODA4NDE5fQ.yJX-OQaDCSpnn8sZjnJ4mzo2E8fXVecBeinScni5WbM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDk1ODM3OCwiZXhwIjoxNzU0OTYxOTc4fQ.-GeB1delLkGMRh2hddTnr70jCT6L7elPf_W_rm0RenI
 
 {
-  "title": "Hola Mundo2",
-  "content_line1": "Contenido",
-  "content_line2": null,
-  "image": null,
+  "title": "Hola Mundo1",
+  "content_line1": "pico de prueba",
+  "content_line2": "  Más detalles opcionales",
+  "image": "https://via.placeholder.com/150",
   "category_title": "Educacion"
 }
 
 ### Actualizar una publicación existente (requiere token)///Categorias validas: Tecnologia, Salud, Educacion, Viajes,Cultura
-PUT http://localhost:3000/api/publicaciones/5
+PUT http://localhost:3000/api/publicaciones/14
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDY5NTc5ZTVmZGJhNDkxZDk5ZTJjMzgxOTc3YTllZjEiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDY2MjQ4MywiZXhwIjoxNzU0NjY2MDgzfQ.Cc3n7pOZAUhFOTSjkDve1HqLF-LZk9rVbnuNKt8xv0U
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzc1ZjhhYjdkNTc2NDVlOThiYmIzNGRmYmU4MzkyMjkiLCJuYW1lIjoib2JlZCIsImlhdCI6MTc1NDk1ODM3OCwiZXhwIjoxNzU0OTYxOTc4fQ.-GeB1delLkGMRh2hddTnr70jCT6L7elPf_W_rm0RenI
 
 {
-  "title": "Hola Mundo Actualizado",
+  "title": "hola mundo3 actualizado",
   "content_line1": "Contenido actualizado",
   "content_line2": "Más detalles opcionales",
   "image": "https://via.placeholder.com/150",
